@@ -11,7 +11,7 @@ class HomePage extends BasePage {
 	}
 
 	async goto() {
-		return this.page.goto(`https://store.steampowered.com`);
+		return this.getPage().goto(`https://store.steampowered.com`);
 	}
 
 	async assertTitle() {

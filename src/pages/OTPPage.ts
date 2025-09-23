@@ -1,6 +1,5 @@
 import { Page, Locator, expect, BrowserContext } from '@playwright/test';
 import { pageType } from '../types';
-import { HomePage } from '../pages/HomePage';
 import { EmailPage } from './EmailPage';
 import { BasePage } from './BasePage';
 
@@ -14,8 +13,8 @@ class OTPPage extends BasePage {
 			page,
 			pageURL: `https://store.steampowered.com/login/?redir=&redir_ssl=1`
 		});
-		this.aNewTab = this.page.context();
-		this.otpFields = this.page.locator(`//div[@class='responsive_page_frame with_header']//input`);
+		this.aNewTab = this.getPage().context();
+		this.otpFields = this.getPage().locator(`//div[@class='responsive_page_frame with_header']//input`);
 
 	}
 
@@ -31,10 +30,10 @@ class OTPPage extends BasePage {
 	}
 
 	async gotoGoogleAccountLogin() {
-		const newPage = await this.page.context().newPage();
-		const emailPage = new EmailPage(this.page);
+		const aNewPage = await this.aNewTab.newPage();
+		const emailPage = new EmailPage({ page: aNewPage });
 
-		return newPage.goto(await emailPage.getPageURL());
+		return aNewPage.goto(emailPage.getPageURL());
 	}
 }
 

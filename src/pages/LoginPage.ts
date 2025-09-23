@@ -13,17 +13,17 @@ class LoginPage extends BasePage {
 			page,
 			pageURL: `https://store.steampowered.com/login/?redir=&redir_ssl=1`
 		});
-		this.usernameField = this.page.locator(`//div[@class='_3BkiHun-mminuTO-Y-zXke']//input[@type='text']`);
-		this.passwordFiled = this.page.locator(`//input[@type='password']`);
-		this.signinButton = this.page.locator(`//button[@type='submit']`);
+		this.usernameField = this.getPage().locator(`//div[@class='_3BkiHun-mminuTO-Y-zXke']//input[@type='text']`);
+		this.passwordFiled = this.getPage().locator(`//input[@type='password']`);
+		this.signinButton = this.getPage().locator(`//button[@type='submit']`);
 	}
 
 	async goto() {
-		this.page.goto(`https://store.steampowered.com`);
+		this.getPage().goto(`https://store.steampowered.com`);
 	}
 
 	async clickLoginLink() {
-		return this.page.click(`//a[@class='global_action_link']`);
+		return this.getPage().click(`//a[@class='global_action_link']`);
 	}
 
 	async login(username: string, password: string) {

@@ -13,10 +13,10 @@ class EmailPage extends BasePage {
 			page,
 			pageURL: `https://workspace.google.com/intl/en-US/gmail/`
 		});
-		this.signInLinkAtTop = this.page.locator('(//a[@data-g-action="sign in"])[3]');
-		this.emailField = this.page.locator(`(//input[@type='email'])`);
-		this.passwordField = this.page.locator(`(//input[@type='password'])`);
-		this.nextButton = this.page.locator(`(//span[text()='Next'])`);
+		this.signInLinkAtTop = this.getPage().locator('(//a[@data-g-action="sign in"])[3]');
+		this.emailField = this.getPage().locator(`(//input[@type='email'])`);
+		this.passwordField = this.getPage().locator(`(//input[@type='password'])`);
+		this.nextButton = this.getPage().locator(`(//span[text()='Next'])`);
 	}
 
 	async loginToEmail(email: string, password: string) {
