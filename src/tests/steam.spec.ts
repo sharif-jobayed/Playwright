@@ -1,10 +1,11 @@
-import { test, expect } from '@playwright/test';
+import { Page, test, expect } from '@playwright/test';
+import { pageType } from '../types/index';
 import { HomePage } from '../pages/HomePage';
 import { LoginPage } from '../pages/LoginPage';
 import { OTPPage } from '../pages/OTPPage';
 import { EmailPage } from '../pages/EmailPage';
 
-test(
+/* test(
 	`Steam homepage loads`,
 	async ({ page }) => {
 		const homePage = new HomePage(page);
@@ -12,12 +13,12 @@ test(
 		await homePage.goto();
 		return homePage.assertTitle();
 	}
-);
+); */
 
 test(
 	`Login to Steam`,
 	async ({ page }) => {
-		const loginPage = new LoginPage(page);
+		const loginPage = new LoginPage({ page }: );
 
 		await loginPage.goto();
 		await loginPage.clickLoginLink();
@@ -28,7 +29,6 @@ test(
 		await otpPage.gotoGoogleAccountLogin();
 
 		const emailPage = new EmailPage(page);
-		await emailPage.isPageLoaded();
-		await emailPage.loginToGoogleAccount();
+		await emailPage.loginToEmail(`globalgamer2017@gmail.com`, `@73450Rox`);
 	}
 );

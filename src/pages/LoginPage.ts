@@ -1,14 +1,18 @@
 import { expect, Locator, Page } from '@playwright/test';
+import { pageType } from '../types/index';
 import { HomePage } from './HomePage';
+import { BasePage } from './BasePage';
 
-class LoginPage {
-	private page: Page;
+class LoginPage extends BasePage {
 	private usernameField: Locator;
 	private passwordFiled: Locator;
 	private signinButton: Locator;
 
-	constructor(page: Page) {
-		this.page = page;
+	constructor({ page }: pageType) {
+		super({
+			page,
+			pageURL: `https://store.steampowered.com/login/?redir=&redir_ssl=1`
+		});
 		this.usernameField = this.page.locator(`//div[@class='_3BkiHun-mminuTO-Y-zXke']//input[@type='text']`);
 		this.passwordFiled = this.page.locator(`//input[@type='password']`);
 		this.signinButton = this.page.locator(`//button[@type='submit']`);
