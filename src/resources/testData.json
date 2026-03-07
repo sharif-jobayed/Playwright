@@ -1,0 +1,30 @@
+
+{
+	"BaseURL": "https://www.saucedemo.com/",
+	"UserCreds": {
+		"Standard": {
+			"Username": "standard_user",
+			"Password": "secret_sauce"
+		},
+		"LockedOut": {
+			"Username": "locked_out_user",
+			"Password": "secret_sauce"
+		},
+		"Problem": {
+			"Username": "problem_user",
+			"Password": "secret_sauce"
+		},
+		"PerformanceGlitch": {
+			"Username": "performance_glitch_user",
+			"Password": "secret_sauce"
+		},
+		"Error": {
+			"Username": "error_user",
+			"Password": "secret_sauce"
+		},
+		"Visual": {
+			"Username": "visual_user",
+			"Password": "secret_sauce"
+		}		
+	}
+}

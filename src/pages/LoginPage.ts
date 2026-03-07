@@ -1,22 +1,29 @@
 
-import { Page, defineConfig } from "@playwright/test";
+import {Page} from "@playwright/test";
+import { BasePage} from "../framework/BasePage";
+import {BaseURL} from "../resources/testData.json";
 
-class LoginPage {
-	private page: Page;
+class LoginPage extends BasePage {
 
 	constructor(page: Page) {
-		this.page = page;
+		super(page);
 	}
 
 	async goto() {
-		await this.page.goto(`https://www.saucedemo.com`);
+		return (await this.getPage()).goto(BaseURL);
 	}
 
 	async login(username: string, password: string) {
-		await this.page.locator(`xpath=(//input[@id='user-name'])`).fill(username);
-		await this.page.locator(`xpath=(//input[@id='password'])`).fill(password);
-		await this.page.locator(`xpath=(//input[@id='login-button'])`).click();
+		const usernameFld = (await this.getPage()).locator(`xpath=(//input[@id='user-name'])`);
+		await usernameFld.fill(username);
+
+		const passwordFld = (await this.getPage()).locator(`xpath=(//input[@id='password'])`);
+		await passwordFld.fill(password);
+
+		const submitBtn = (await this.getPage()).locator(`xpath=(//input[@id='login-button'])`);
+		await submitBtn.click();
 	}
+
 }
 
 export { LoginPage }
