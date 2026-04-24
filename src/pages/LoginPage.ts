@@ -1,27 +1,38 @@
+import { Locator, Page } from "@playwright/test";
 
-import {Page} from "@playwright/test";
-import { BasePage} from "../framework/BasePage";
-import {BaseURL} from "../resources/testData.json";
-
-class LoginPage extends BasePage {
+class LoginPage {
+	private page: Page;
+	private usernameFld: () => Locator;
 
 	constructor(page: Page) {
-		super(page);
+		this.page = page;
+
+		this.usernameFld = () => {
+			return this.page.locator(`xpath=(//input[@data-test="username"])`);
+		}
 	}
 
-	async goto() {
-		return (await this.getPage()).goto(BaseURL);
+	public goto = async (url: string): Promise<void> => {
+		await this.page.goto(url);
 	}
 
-	async login(username: string, password: string) {
-		const usernameFld = (await this.getPage()).locator(`xpath=(//input[@id='user-name'])`);
-		await usernameFld.fill(username);
+	public fillUsername = async (username: string): Promise<void> => {
+		return this.usernameFld().fill(username);
+	}
 
-		const passwordFld = (await this.getPage()).locator(`xpath=(//input[@id='password'])`);
-		await passwordFld.fill(password);
+	public fillPassword = async (password: string): Promise<void> => {
+		const passwordFld = this.page.locator(`xpath=(//input[@id='password'])`);
+		return passwordFld.fill(password);
+	}
 
-		const submitBtn = (await this.getPage()).locator(`xpath=(//input[@id='login-button'])`);
-		await submitBtn.click();
+	public pressLogin = async (): Promise<void> => {
+		const
+	}
+
+	public login = async (username: string, password: string): Promise<void> => {
+		await this.fillUsername(username);
+		await this.fillPassword(password);
+		return this.pressLogin();
 	}
 
 }
